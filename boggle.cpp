@@ -103,11 +103,9 @@ bool boggleHelper(const std::set<std::string>& dict, const std::set<std::string>
 	curr += board[r][c];
 	if (dict.count(curr) == 1) {
 		if (prefix.count(curr) == 1) {
-			if (r + dr >= board.size() || c + dc >= board[r + dr].size()) {
+			if(boggleHelper(dict, prefix, board, curr, result, r + dr, c + dc, dr, dc) == false) {
 				result.insert(curr);
 				return true;
-			}
-			return boggleHelper(dict, prefix, board, curr, result, r + dr, c + dc, dr, dc);
 		}
 		result.insert(curr);
 		return true;
