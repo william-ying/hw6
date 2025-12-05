@@ -474,7 +474,7 @@ HASH_INDEX_T HashTable<K,V,Prober,Hash,KEqual>::probe(const KeyType& key) const
 	// std::cout << "probing" << std::endl;
     while(Prober::npos != loc)
     {
-		std::cout << totalProbes_ << std::endl;
+		// std::cout << totalProbes_ << std::endl;
         if(nullptr == table_[loc] ) {
             return loc;
         }
