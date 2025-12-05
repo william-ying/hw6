@@ -348,13 +348,12 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
 		this->resize();
 	}
 	if (this->probe(p.first) != npos) {
-		HashItem* n = new HashItem(p);
+		
 		if (table_[this->probe(p.first)] != nullptr) {
-			std::cout << "debug " << p.first << std::endl;
-			delete table_[this->probe(p.first)];
-			std::cout << "debug 2 " << p.first << std::endl;
+			HashItem* del = table_[this->probe(p.first)];
+			delete del;
 		}
-		table_[this->probe(p.first)] = n;
+		table_[this->probe(p.first)] = new HashItem(p);
 	} else {
 		// std::cout << table_.size() << std::endl;
 		// std::cout << this->size() << std::endl;
