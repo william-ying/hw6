@@ -42,7 +42,7 @@ struct MyStringHash {
     {
         // Add code here or delete this helper function if you do not want it
         if (isalpha(letter)) {return std::tolower(letter) - 96;}
-        else {return atoi(letter);}
+        else {return atoi(&letter);}
     }
 
     // Code to generate the random R values
