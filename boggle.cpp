@@ -106,6 +106,9 @@ bool boggleHelper(const std::set<std::string>& dict, const std::set<std::string>
 			if(boggleHelper(dict, prefix, board, curr, result, r + dr, c + dc, dr, dc) == false) {
 				result.insert(curr);
 				return true;
+			} else {
+				return true;
+			}
 		}
 		result.insert(curr);
 		return true;
