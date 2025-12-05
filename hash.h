@@ -31,7 +31,7 @@ struct MyStringHash {
                     pos += (letterDigitToNumber(k[i - j]));
                 }
             }
-            std::cout << pos << " " << 4 - counter << std::endl;
+            // std::cout << pos << " " << 4 - counter << std::endl;
             ret += pos * rValues[4 - counter];
             counter++;
         }
