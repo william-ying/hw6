@@ -99,6 +99,7 @@ bool boggleHelper(const std::set<std::string>& dict, const std::set<std::string>
 		return false;
 	}
 	std::string curr = word;
+	std::cout << curr << endl;
 	curr += board[r][c];
 	if (dict.count(curr) == 1) {
 		if (prefix.count(curr) == 1) {
