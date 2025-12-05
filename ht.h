@@ -441,6 +441,7 @@ typename HashTable<K,V,Prober,Hash,KEqual>::HashItem* HashTable<K,V,Prober,Hash,
 template<typename K, typename V, typename Prober, typename Hash, typename KEqual>
 void HashTable<K,V,Prober,Hash,KEqual>::resize()
 {
+	std::cout << "resizing" << std::endl;
 	mIndex_++;
 	if (mIndex_ >= 28) throw std::logic_error("no larger size available");
 	std::vector<HashItem*> temptable = table_;
@@ -453,6 +454,8 @@ void HashTable<K,V,Prober,Hash,KEqual>::resize()
 			this->insert(temp->item);
 		}
 	}
+	std::cout << this->size() << std::endl;
+	std::cout << table_.size() << std::endl;
 }
 
 // Almost complete
