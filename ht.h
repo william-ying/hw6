@@ -347,12 +347,12 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
 	if (this.size() > resizeAlpha * CAPACITIES[mIndex_]) {
 		this.resize();
 	}
-	if (probe(hash_(p)) != npos) {
+	if (this.probe(this.hash_(p)) != npos) {
 		HashItem* n = new HashItem(p);
-		if (table_[probe(hash_(p))] != nullptr) delete table_[probe(hash_(p))];
-		table_[probe(hash_(p))] = n;
+		if (table_[this.probe(this.hash_(p))] != nullptr) delete table_[this.probe(this.hash_(p))];
+		table_[this.probe(this.hash_(p))] = n;
 	} else {
-		throw std::logic_error;
+		throw std::logic_error("no free location");
 	}
 
 }
@@ -361,8 +361,8 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
 template<typename K, typename V, typename Prober, typename Hash, typename KEqual>
 void HashTable<K,V,Prober,Hash,KEqual>::remove(const KeyType& key)
 {
-	if (probe(hash_(p)) != npos) {
-		table_[probe(hash_(p))]->deleted = true;
+	if (this.probe(this.hash_(p)) != npos) {
+		table_[this.probe(this.hash_(p))]->deleted = true;
 	}
 }
 
@@ -437,8 +437,18 @@ typename HashTable<K,V,Prober,Hash,KEqual>::HashItem* HashTable<K,V,Prober,Hash,
 template<typename K, typename V, typename Prober, typename Hash, typename KEqual>
 void HashTable<K,V,Prober,Hash,KEqual>::resize()
 {
-	
-    
+	mIndex_++;
+	if (mIndex_ >= CAPACITIES.size()) throw std::logic_error("no larger size available");
+	std::vector<HashItem*> temptable = table_;
+	table_.clear();
+	for (int i = 0; i < CAPACITIES[mIndex_]; i++) {
+		table_.push_back(nullptr);
+	}
+	for (HashItem* temp : temptable) {
+		if (temp != NULL && temp->deleted == false) {
+			this.insert(this.hash_(temp->item));
+		}
+	}
 }
 
 // Almost complete
