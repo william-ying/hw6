@@ -356,6 +356,7 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
 		std::cout << this->size() << std::endl;
 		std::cout << alpha << std::endl;
 		std::cout << CAPACITIES[mIndex_] << std::endl;
+		std::cout << alpha * CAPACITIES[mIndex_] << std::endl;
 		throw std::logic_error("no free location");
 	}
 
@@ -482,7 +483,8 @@ HASH_INDEX_T HashTable<K,V,Prober,Hash,KEqual>::probe(const KeyType& key) const
         loc = prober_.next();
         totalProbes_++;
     }
-
+	cout << key << endl;
+	cout << "npos" << endl;
     return npos;
 }
 
