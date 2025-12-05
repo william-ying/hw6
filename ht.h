@@ -349,14 +349,17 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
 	}
 	if (this->probe(p.first) != npos) {
 		HashItem* n = new HashItem(p);
-		if (table_[this->probe(p.first)] != nullptr) delete table_[this->probe(p.first)];
+		if (table_[this->probe(p.first)] != nullptr) {
+			std::cout << "debug " << p.first << std::endl;
+			delete table_[this->probe(p.first)];
+		}
 		table_[this->probe(p.first)] = n;
 	} else {
-		std::cout << table_.size() << std::endl;
-		std::cout << this->size() << std::endl;
-		std::cout << alpha << std::endl;
-		std::cout << CAPACITIES[mIndex_] << std::endl;
-		std::cout << alpha * CAPACITIES[mIndex_] << std::endl;
+		// std::cout << table_.size() << std::endl;
+		// std::cout << this->size() << std::endl;
+		// std::cout << alpha << std::endl;
+		// std::cout << CAPACITIES[mIndex_] << std::endl;
+		// std::cout << alpha * CAPACITIES[mIndex_] << std::endl;
 		throw std::logic_error("no free location");
 	}
 
@@ -468,7 +471,7 @@ HASH_INDEX_T HashTable<K,V,Prober,Hash,KEqual>::probe(const KeyType& key) const
 
     HASH_INDEX_T loc = prober_.next(); 
     totalProbes_++;
-	std::cout << "probing" << std::endl;
+	// std::cout << "probing" << std::endl;
     while(Prober::npos != loc)
     {
 		std::cout << totalProbes_ << std::endl;
@@ -483,8 +486,8 @@ HASH_INDEX_T HashTable<K,V,Prober,Hash,KEqual>::probe(const KeyType& key) const
         loc = prober_.next();
         totalProbes_++;
     }
-	std::cout << key << std::endl;
-	std::cout << "npos" << std::endl;
+	// std::cout << key << std::endl;
+	// std::cout << "npos" << std::endl;
     return npos;
 }
 
