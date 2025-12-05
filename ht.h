@@ -273,6 +273,7 @@ private:
     HASH_INDEX_T mIndex_;  // index to CAPACITIES
 
     // ADD MORE DATA MEMBERS HERE, AS NECESSARY
+	double alpha;
 
 };
 
@@ -296,35 +297,63 @@ HashTable<K,V,Prober,Hash,KEqual>::HashTable(
        :  hash_(hash), kequal_(kequal), prober_(prober)
 {
     // Initialize any other data members as necessary
-
+	mIndex_ = 0;
+	alpha = resizeAlpha;
+	for (int i = 0; i < 11; i++) {
+		table_.push_back(nullptr);
+	}
 }
 
 // To be completed
 template<typename K, typename V, typename Prober, typename Hash, typename KEqual>
 HashTable<K,V,Prober,Hash,KEqual>::~HashTable()
 {
-
+	for (HashItem* temp : table_) {
+		if (temp != NULL) {
+			delete temp;
+		}
+	}
 }
 
 // To be completed
 template<typename K, typename V, typename Prober, typename Hash, typename KEqual>
 bool HashTable<K,V,Prober,Hash,KEqual>::empty() const
 {
-
+	for (HashItem* temp : table_) {
+		if (temp != NULL && temp->deleted == false) {
+			return false;
+		}
+	}
+	return true;
 }
 
 // To be completed
 template<typename K, typename V, typename Prober, typename Hash, typename KEqual>
 size_t HashTable<K,V,Prober,Hash,KEqual>::size() const
 {
-
+	size_t ret = 0;
+	for (HashItem* temp : table_) {
+		if (temp != NULL && temp->deleted == false) {
+			ret++;
+		}
+	}
+	return ret;
 }
 
 // To be completed
 template<typename K, typename V, typename Prober, typename Hash, typename KEqual>
 void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
 {
-
+	if (this.size() > resizeAlpha * CAPACITIES[mIndex_]) {
+		this.resize();
+	}
+	if (probe(hash_(p)) != npos) {
+		HashItem* n = new HashItem(p);
+		if (table_[probe(hash_(p))] != nullptr) delete table_[probe(hash_(p))];
+		table_[probe(hash_(p))] = n;
+	} else {
+		throw std::logic_error;
+	}
 
 }
 
@@ -332,8 +361,9 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
 template<typename K, typename V, typename Prober, typename Hash, typename KEqual>
 void HashTable<K,V,Prober,Hash,KEqual>::remove(const KeyType& key)
 {
-
-
+	if (probe(hash_(p)) != npos) {
+		table_[probe(hash_(p))]->deleted = true;
+	}
 }
 
 
@@ -407,7 +437,7 @@ typename HashTable<K,V,Prober,Hash,KEqual>::HashItem* HashTable<K,V,Prober,Hash,
 template<typename K, typename V, typename Prober, typename Hash, typename KEqual>
 void HashTable<K,V,Prober,Hash,KEqual>::resize()
 {
-
+	
     
 }
 
