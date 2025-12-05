@@ -352,7 +352,7 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
 		if (table_[this->probe(p.first)] != nullptr) delete table_[this->probe(p.first)];
 		table_[this->probe(p.first)] = n;
 	} else {
-		std::cout << table_.size() << endl;
+		std::cout << table_.size() << std::endl;
 		throw std::logic_error("no free location");
 	}
 
