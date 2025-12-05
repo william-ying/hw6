@@ -366,7 +366,7 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
 template<typename K, typename V, typename Prober, typename Hash, typename KEqual>
 void HashTable<K,V,Prober,Hash,KEqual>::remove(const KeyType& key)
 {
-	if (this->probe(key) != npos) {
+	if (this->probe(key) != NULL && this->probe(key) != npos) {
 		table_[this->probe(key)]->deleted = true;
 	}
 }
