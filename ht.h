@@ -352,6 +352,7 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
 		if (table_[this->probe(p.first)] != nullptr) {
 			std::cout << "debug " << p.first << std::endl;
 			delete table_[this->probe(p.first)];
+			std::cout << "debug 2 " << p.first << std::endl;
 		}
 		table_[this->probe(p.first)] = n;
 	} else {
