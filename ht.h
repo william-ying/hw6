@@ -483,8 +483,8 @@ HASH_INDEX_T HashTable<K,V,Prober,Hash,KEqual>::probe(const KeyType& key) const
         loc = prober_.next();
         totalProbes_++;
     }
-	cout << key << endl;
-	cout << "npos" << endl;
+	std::cout << key << std::endl;
+	std::cout << "npos" << std::endl;
     return npos;
 }
 
