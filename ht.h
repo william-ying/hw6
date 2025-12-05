@@ -353,6 +353,9 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
 		table_[this->probe(p.first)] = n;
 	} else {
 		std::cout << table_.size() << std::endl;
+		std::cout << this->size() << std::endl;
+		std::cout << alpha << std::endl;
+		std::cout << CAPACITIES[mIndex_] << std::endl;
 		throw std::logic_error("no free location");
 	}
 
