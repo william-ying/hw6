@@ -42,8 +42,8 @@ struct MyStringHash {
     HASH_INDEX_T letterDigitToNumber(char letter) const
     {
         // Add code here or delete this helper function if you do not want it
-        if (isalpha(letter)) {return std::tolower(letter) - 96;}
-        else {return atoi(&letter);}
+        if (isalpha(letter)) {return std::tolower(letter) - 97;}
+        else {return atoi(&letter) + 26;}
     }
 
     // Code to generate the random R values
